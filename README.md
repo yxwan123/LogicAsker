@@ -85,4 +85,16 @@ gen_prompt(category=category, rule=rules, fallacy=fallacies, length=l) # fallacy
 Use LogicAsker to test customized LLMs in just two steps:
 
 - Create a class in `LogicAsker.py` that inherit from the *Bot* class, and overwrite the *query* method where the input is a query (string) and the output is yourLLM's answer (string) to that query.
+
 - Update the *BOT_DICT* in `LogicAsker.py` to include your LLM class.
+
+  
+
+## Acknowledgement
+
+The code of this work is inspired by [LogicInference: A New Dataset for Teaching Logical Inference to seq2seq Models](https://arxiv.org/abs/2203.15099). The contribution of our work are
+
+- We are the first work that formally defines a set of 30 atomic skills and 208 extended skills that an LLM should possess to perform formal reasoning based on propositional logic and predicate logic, two fundamental systems of formal logic;
+- We develop LogicAsker, a fully automatic tool that can systematically generate test cases under the basic skills and provide insights into LLMs’ reasoning capacities;
+- We are the first work that can create prompts based on testing results to improve the performance of LLMs effectively.
+
