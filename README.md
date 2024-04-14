@@ -7,8 +7,7 @@ Recent advancements in large language models (LLMs) have propelled Artificial In
 **This repository contains:**
 
 1. **Code implementation and utilities of LogicAsker**, i.e., the python script and instructions to run LogicAsker to test LLMs specified in the paper.
-2. **Sample dataset**, we present the sample of generated data which we used in our experiment in `data/queries`.
-3. **Qurey-answer pairs for all tested LLMs**, we provide all the test records of LLMs under test in `data/answers`.
+2. **Generated dataset**, we present a sample of generated data which we used in our experiment in `data/`.
 
 ----
 
