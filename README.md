@@ -8,7 +8,7 @@ Large Language Models"](https://arxiv.org/abs/2401.00757). This artifact supplie
 
 **Quick Links**
 
-[Abstract](#Abstract)| [Insights](#Insights) | [Dataset 🤗](https://huggingface.co/datasets/iforgott/LogicAsker) | [Code Usage](#Code_Usage)
+[Abstract](#Abstract) | [Insights](#Insights) | [Dataset 🤗](https://huggingface.co/datasets/iforgott/LogicAsker) | [Code Usage](#Code)
 
 
 
@@ -37,7 +37,7 @@ We introduce LogicAsker, a novel approach for evaluating and enhancing the logic
 
 
 
-# Code Usage
+# Code
 
 ## Install environment 
 
