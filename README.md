@@ -1,32 +1,50 @@
-# Artifact for the Paper "A ∧ B ⇔ B ∧ A: Triggering Logical Reasoning Failures in Large Language Models"
-
-This is the artifact for the paper "***A ∧ B ⇔ B ∧ A: Triggering Logical Reasoning Failures in Large Language Models***". This artifact supplies the LogicAsker toolkit and supplementary materials for the paper.
-
-Recent advancements in large language models (LLMs) have propelled Artificial Intelligence (AI) to new heights, enabling breakthroughs in various tasks such as writing assistance, code generation, and machine translation. A significant distinction of advanced LLMs, such as ChatGPT, is their demonstrated ability to "reason". In this paper, we introduce LogicAsker, an automatic tool that comprehensively evaluates the logical reasoning bilities of LLMs under propositional logic and predicate logic. LogicAsker generates test cases to trigger logical failures systematically and evaluates LLMs’ performance on specific reasoning skills. The results provide insights into LLMs’ reasoning abilities and weaknesses and can be used for in-context learning to improve their logical reasoning capabilities. We evaluate LogicAsker on six widely-deployed LLMs, and the results show that test cases from LogicAsker can find logical reasoning failures in different LLMs with a rate of 25% - 94%. Besides, the test cases of LogicAsker can be further used to design demonstration examples for in-context learning and can effectively improve the logical reasoning ability of LLMs, e.g., 75% to 85% for GPT-4.
+This is the artifact for the paper ["LogicAsker: Evaluating and Improving the Logical Reasoning Ability of
+Large Language Models"](https://arxiv.org/abs/2401.00757). This artifact supplies the LogicAsker toolkit and supplementary materials for the paper.
 
 **This repository contains:**
 
 1. **Code implementation and utilities of LogicAsker**, i.e., the python script and instructions to run LogicAsker to test LLMs specified in the paper.
-2. **Generated dataset**, we present a sample of generated data which we used in our experiment in `data/`.
+2. **Generated dataset**, we present a sample of 5.2k generated data that we used in our experiment in `data/`. A training dataset of size 10.4k is available on [Huggingface 🤗](https://huggingface.co/datasets/iforgott/LogicAsker).
 
-----
+**Quick Links**
 
-**Contents**
-
-- [Environment Setup](#Environment-Setup)
-- [Test LLMs in the paper](#Testing-LLMs)
-- [Test customized LLM with LogicAsker](#Testing-Customized-LLM)
-
-----
+[Abstract](#Abstract)| [Insights](#Insights) | [Dataset 🤗](https://huggingface.co/datasets/iforgott/LogicAsker) | [Code Usage](#Code_Usage)
 
 
-## Environment-Setup
+
+# Abstract
+
+We introduce LogicAsker, a novel approach for evaluating and enhancing the logical reasoning capabilities of large language models (LLMs) such as ChatGPT and GPT-4. Despite LLMs' prowess in tasks like writing assistance, code generation, and machine translation, assessing their ability to reason has been challenging. Traditional evaluations often prioritize accuracy on downstream tasks over direct assessments of reasoning processes. LogicAsker addresses this gap by employing a set of atomic reasoning skills grounded in propositional and predicate logic to systematically examine and improve the reasoning prowess of LLMs. Our methodology reveals significant gaps in LLMs' learning of logical rules, with identified reasoning failures ranging from 29% to 90% across different models. Moreover, we leverage these findings to construct targeted demonstration examples and fine-tune data, notably enhancing logical reasoning in models like GPT-4o by up to 5%. To our knowledge, this is the first effort to utilize test case outcomes to effectively refine LLMs' formal reasoning capabilities.
+
+![image-20250104223152607](./assets/logicasker_framework.png)
+
+
+
+# Insights
+
+**LogicAsker can effectively expose logical failures in the first iteration. When focusing on the weak skills of LLMs in the second iteration, we further reduce the accuracy of the LLMs.** 
+
+<img src="./assets/overall.png" alt="image-20250104223152607" style="zoom:22%;" />
+
+**Most LLMs are better at easier logical skills such as propositional logic.**
+
+<img src="./assets/different_logic.png" alt="image-20250104223152607" style="zoom:20%;" />
+
+**Most LLMs are weak in recognizing logical fallacies.**
+
+<img src="./assets/rule_category.png" alt="image-20250104223152607" style="zoom:22%;" />
+
+
+
+# Code Usage
+
+## Install environment 
 
 Please install the required modules by using `./init.sh env`.
 
-## Testing LLMs
+## Generating data
 
-### Generating data
+Example code for generating data is available in `./generate_data.ipynb`.
 
 To generate $n$ pieces of quiries, with problem categories being "inference", "contradiction", or "unrelated", and with inference length $l$, using specific list of rules, please use the following code:
 
@@ -41,7 +59,7 @@ To generate $n$ pieces of enquiries, with problem categories being "inference", 
 gen_cases(n, category, l, fallacies)
 ```
 
-### Query an LLM
+## Query an LLM
 
 You can conduct experiment with our sample data or self generated data on a particular LLM specified in our paper. An example to test GPT4 using sample data and save the question-answer pairs as "example.csv" is as follows. Note that to connect to OpenAI API, you need to first store your API key in a txt file and provide the path to the key file as a parameter:
 
@@ -83,17 +101,8 @@ gen_prompt(category=category, rule=rules, fallacy=fallacies, length=l) # fallacy
 
 Use LogicAsker to test customized LLMs in just two steps:
 
-- Create a class in `LogicAsker.py` that inherit from the *Bot* class, and overwrite the *query* method where the input is a query (string) and the output is yourLLM's answer (string) to that query.
+- Create a class in `script/apis.py` that inherit from the *Bot* class, and overwrite the *query* method where the input is a query (string) and the output is yourLLM's answer (string) to that query.
 
 - Update the *BOT_DICT* in `LogicAsker.py` to include your LLM class.
 
   
-
-## Acknowledgement
-
-The code of this work is inspired by [LogicInference: A New Dataset for Teaching Logical Inference to seq2seq Models](https://arxiv.org/abs/2203.15099). The contribution of our work are
-
-- We are the first work that formally defines a set of 30 atomic skills and 208 extended skills that an LLM should possess to perform formal reasoning based on propositional logic and predicate logic, two fundamental systems of formal logic;
-- We develop LogicAsker, a fully automatic tool that can systematically generate test cases under the basic skills and provide insights into LLMs’ reasoning capacities;
-- We are the first work that can create prompts based on testing results to improve the performance of LLMs effectively.
-
