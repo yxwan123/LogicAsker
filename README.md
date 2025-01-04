@@ -1,3 +1,7 @@
+**Quick Links**
+
+[Abstract](#Abstract)| [Insights](#Insights) | [Dataset 🤗](https://huggingface.co/datasets/iforgott/LogicAsker) | [Code Usage](#Code_Usage)
+
 This is the artifact for the paper ["LogicAsker: Evaluating and Improving the Logical Reasoning Ability of
 Large Language Models"](https://arxiv.org/abs/2401.00757). This artifact supplies the LogicAsker toolkit and supplementary materials for the paper.
 
@@ -6,9 +10,7 @@ Large Language Models"](https://arxiv.org/abs/2401.00757). This artifact supplie
 1. **Code implementation and utilities of LogicAsker**, i.e., the python script and instructions to run LogicAsker to test LLMs specified in the paper.
 2. **Generated dataset**, we present a sample of 5.2k generated data that we used in our experiment in `data/`. A training dataset of size 10.4k is available on [Huggingface 🤗](https://huggingface.co/datasets/iforgott/LogicAsker).
 
-**Quick Links**
 
-[Abstract](#Abstract)| [Insights](#Insights) | [Dataset 🤗](https://huggingface.co/datasets/iforgott/LogicAsker) | [Code Usage](#Code_Usage)
 
 
 
